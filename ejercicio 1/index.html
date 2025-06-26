@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Ejercicio 1 - Calculadora</title>
+</head>
+<body>
+  <h1>Calculadora Básica</h1>
+
+  <!-- Formulario -->
+  <label>Número 1:
+    <input type="number" id="num1">
+  </label>
+  <br><br>
+
+  <label>Número 2:
+    <input type="number" id="num2">
+  </label>
+  <br><br>
+
+  <label>Operación:
+    <select id="operacion">
+      <option value="suma">Suma</option>
+      <option value="resta">Resta</option>
+      <option value="multiplicacion">Multiplicación</option>
+      <option value="division">División</option>
+    </select>
+  </label>
+  <br><br>
+
+  <!-- Botón que se desactiva si se elige "división" -->
+  <button id="calcularBtn" onclick="calcular()">Calcular</button>
+
+  <h2 id="resultado"></h2>
+
+  <script src="script.js"></script>
+</body>
+</html>
