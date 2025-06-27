@@ -1,10 +1,11 @@
-const todosEndpoint = "https://jsonplaceholder.typicode.com/todos";
+const todosEndpoint = "https://jsonplaceholder.typicode.com/todos?_limit=5";
 const todosListDiv = document.getElementById("todos-list");
 const errorMessageDiv = document.getElementById("error-message");
 const loadingDiv = document.getElementById("loading");
 const fetchTodosBtn = document.getElementById("fetch-todos-btn");
 
 fetchTodosBtn.addEventListener("click", async () => {
+  // Limpiar estados anteriores
   todosListDiv.innerHTML = "";
   errorMessageDiv.textContent = "";
   loadingDiv.style.display = "block";
@@ -20,22 +21,22 @@ fetchTodosBtn.addEventListener("click", async () => {
 
     const data = await response.json();
 
-    // Filtramos las tareas completadas y tomamos solo las primeras 5
-    const tareasCompletadas = data.filter(tarea => tarea.completed === true).slice(0, 5);
+    if (data && data.length > 0) {
+      data.forEach(tarea => {
+        const todoElement = document.createElement("div");
+        todoElement.classList.add("todo-item");
+        todoElement.classList.add(tarea.completed ? "completed" : "incomplete");
 
-    if (tareasCompletadas.length > 0) {
-      const ul = document.createElement("ul");
+        todoElement.innerHTML = `
+          <p><strong>ID:</strong> ${tarea.id}</p>
+          <p><strong>Título:</strong> ${tarea.title}</p>
+          <p><strong>Completado:</strong> ${tarea.completed ? "Sí" : "No"}</p>
+        `;
 
-      tareasCompletadas.forEach(tarea => {
-        const li = document.createElement("li");
-        li.textContent = tarea.title;
-        li.classList.add("todo-item", "completed");
-        ul.appendChild(li);
+        todosListDiv.appendChild(todoElement);
       });
-
-      todosListDiv.appendChild(ul);
     } else {
-      todosListDiv.textContent = "No hay tareas completadas.";
+      todosListDiv.textContent = "No se encontraron tareas.";
     }
 
   } catch (error) {
