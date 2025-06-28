@@ -7,15 +7,18 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Ejemplo 1: Lista de Tareas (GET de JSONPlaceholder)</h1>
+  <h1>Ejercicio 3: Lista de Tareas (GET de API JSONPlaceholder)</h1>
   <p>Este ejemplo obtiene una lista de 5 tareas de la API pública JSONPlaceholder y las muestra a continuación.</p>
 
-  <button id="fetch-todos-btn">Cargar Tareas</button>
+  <!-- Formulario con botón -->
+  <form id="formTareas">
+    <button type="submit" id="fetch-todos-btn">Cargar Tareas</button>
+  </form>
+
   <div id="loading" style="display: none;">Cargando tareas...</div>
   <div id="todos-list"></div>
   <div id="error-message" class="error"></div>
 
   <script src="script.js"></script>
-  
 </body>
 </html>
