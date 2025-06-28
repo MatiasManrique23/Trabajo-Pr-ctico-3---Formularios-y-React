@@ -2,9 +2,12 @@ const todosEndpoint = "https://jsonplaceholder.typicode.com/todos?_limit=5";
 const todosListDiv = document.getElementById("todos-list");
 const errorMessageDiv = document.getElementById("error-message");
 const loadingDiv = document.getElementById("loading");
-const fetchTodosBtn = document.getElementById("fetch-todos-btn");
+const formTareas = document.getElementById("formTareas");
 
-fetchTodosBtn.addEventListener("click", async () => {
+// Evento submit del formulario
+formTareas.addEventListener("submit", async (event) => {
+  event.preventDefault(); // Evita que se recargue la página
+
   // Limpiar estados anteriores
   todosListDiv.innerHTML = "";
   errorMessageDiv.textContent = "";

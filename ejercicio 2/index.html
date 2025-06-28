@@ -1,24 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Ejercicio 2 - Filtrar palabras</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ejercicio 3 - Lista de Tareas</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <h1>Filtrar Palabras</h1>
+  <h1>Ejercicio 3: Lista de Tareas (GET de API JSONPlaceholder)</h1>
+  <p>Este ejemplo obtiene una lista de 5 tareas de la API pública JSONPlaceholder y las muestra a continuación.</p>
 
-  <!-- Formulario con input y botón -->
-  <form id="formFiltro">
-    <label for="filtroInput">Buscar palabra:</label>
-    <input type="text" id="filtroInput" name="filtroInput">
-    <button type="submit" id="filtrarBtn">Filtrar</button>
+  <!-- Formulario con botón -->
+  <form id="formTareas">
+    <button type="submit" id="fetch-todos-btn">Cargar Tareas</button>
   </form>
 
-  <!-- Mensaje de error -->
-  <p id="mensajeError" style="color: red;"></p>
-
-  <!-- Lista de palabras -->
-  <ul id="listaPalabras"></ul>
+  <div id="loading" style="display: none;">Cargando tareas...</div>
+  <div id="todos-list"></div>
+  <div id="error-message" class="error"></div>
 
   <script src="script.js"></script>
 </body>

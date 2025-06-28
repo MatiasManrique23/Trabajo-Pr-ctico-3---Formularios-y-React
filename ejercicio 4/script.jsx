@@ -1,19 +1,21 @@
 function BotonesAlternados() {
-  // Estado: true si el botón izquierdo está habilitado
+  // Estado inicial: botón izquierdo activo
   const [activoIzquierdo, setActivoIzquierdo] = React.useState(true);
 
-  // Al presionar el izquierdo, lo desactiva y activa el derecho
-  const manejarClickIzquierdo = () => {
-    setActivoIzquierdo(false);
+  // Manejador de evento para botón izquierdo
+  const manejarClickIzquierdo = (e) => {
+    e.preventDefault(); // Evita comportamiento por defecto del formulario
+    setActivoIzquierdo(false); // Desactiva izquierdo, activa derecho
   };
 
-  // Al presionar el derecho, lo desactiva y activa el izquierdo
-  const manejarClickDerecho = () => {
-    setActivoIzquierdo(true);
+  // Manejador de evento para botón derecho
+  const manejarClickDerecho = (e) => {
+    e.preventDefault();
+    setActivoIzquierdo(true); // Desactiva derecho, activa izquierdo
   };
 
   return (
-    <div className="contenedor">
+    <form>
       <button
         onClick={manejarClickIzquierdo}
         disabled={!activoIzquierdo}
@@ -29,10 +31,10 @@ function BotonesAlternados() {
       >
         Derecho
       </button>
-    </div>
+    </form>
   );
 }
 
-// Render del componente en el div con id "root"
+// Render del componente
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<BotonesAlternados />);

@@ -1,10 +1,10 @@
-// La lista de palabras predefinida
+// Lista predefinida de palabras
 const palabras = ["manzana", "banana", "pera", "durazno", "frutilla", "mango", "naranja", "sandía"];
 
-// Función para mostrar la lista completa de palabras
+// Muestra la lista completa al cargar la página
 function mostrarTodasLasPalabras() {
   const listaHtml = document.getElementById("listaPalabras");
-  listaHtml.innerHTML = ''; // Limpiamos la lista actual
+  listaHtml.innerHTML = '';
   palabras.forEach(palabra => {
     const li = document.createElement("li");
     li.textContent = palabra;
@@ -12,30 +12,27 @@ function mostrarTodasLasPalabras() {
   });
 }
 
-// Función para filtrar palabras y actualizar la UI
-function filtrarPalabras() {
-  const filtroInput = document.getElementById("filtroInput");
-  const textoFiltro = filtroInput.value.toLowerCase().trim(); // Obtenemos el texto y lo limpiamos
-  const listaHtml = document.getElementById("listaPalabras");
-  const mensajeError = document.getElementById("mensajeError"); // Para el mensaje de error de la consigna
+// Función para filtrar palabras
+function filtrarPalabras(event) {
+  event.preventDefault(); // Evita recargar la página
 
-  // Limpiar el mensaje de error cada vez que se intenta filtrar
+  const textoFiltro = document.getElementById("filtroInput").value.toLowerCase().trim();
+  const listaHtml = document.getElementById("listaPalabras");
+  const mensajeError = document.getElementById("mensajeError");
+
   mensajeError.textContent = "";
 
-  // Si el campo de texto está vacío al presionar "Filtrar"
   if (textoFiltro === "") {
-    mensajeError.textContent = "Error: Por favor, ingresa un texto para filtrar."; // Mostrar el mensaje de error de la consigna 
-    mostrarTodasLasPalabras(); // Mostrar la lista completa [cite: 14]
-    return; // Salir de la función para no hacer un filtrado vacío.
+    mensajeError.textContent = "Error: Por favor, ingresa un texto para filtrar.";
+    mostrarTodasLasPalabras();
+    return;
   }
 
-  // Filtrar las palabras
   const palabrasFiltradas = palabras.filter(palabra =>
     palabra.toLowerCase().includes(textoFiltro)
   );
 
-  // Actualizar el contenido mostrado en la página, sin recargarla [cite: 14]
-  listaHtml.innerHTML = ''; // Limpiamos la lista antes de mostrar los resultados
+  listaHtml.innerHTML = '';
 
   if (palabrasFiltradas.length > 0) {
     palabrasFiltradas.forEach(palabra => {
@@ -50,20 +47,17 @@ function filtrarPalabras() {
   }
 }
 
-// Event Listeners
-document.addEventListener("DOMContentLoaded", mostrarTodasLasPalabras); // Mostrar todas las palabras al cargar la página
+// Mostrar todas las palabras al cargar
+document.addEventListener("DOMContentLoaded", mostrarTodasLasPalabras);
 
-// Listener para el botón "Filtrar"
-document.getElementById("filtrarBtn").addEventListener("click", filtrarPalabras);
+// Asignar evento al formulario
+document.getElementById("formFiltro").addEventListener("submit", filtrarPalabras);
 
-// NUEVA FUNCIONALIDAD: Listener para el campo de texto (input)
-// Cuando el usuario escribe o borra texto, verificamos si el campo está vacío.
-document.getElementById("filtroInput").addEventListener("keyup", function() {
-  const textoFiltro = this.value.toLowerCase().trim();
-  const mensajeError = document.getElementById("mensajeError");
-
-  if (textoFiltro === "") {
-    mostrarTodasLasPalabras(); // Si el input está vacío, mostrar todas las palabras
-    mensajeError.textContent = ""; // Limpiar cualquier mensaje de error si el usuario borró todo
+// Extra: si borra el input, se muestra la lista completa
+document.getElementById("filtroInput").addEventListener("keyup", function () {
+  const texto = this.value.trim();
+  if (texto === "") {
+    document.getElementById("mensajeError").textContent = "";
+    mostrarTodasLasPalabras();
   }
 });
